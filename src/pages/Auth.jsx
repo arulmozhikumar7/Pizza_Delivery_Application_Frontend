@@ -44,9 +44,9 @@ const Auth = () => {
       const cartResponse = await axios.get(
         `http://localhost:3000/api/cart/${response.data.userId}`
       );
+
       dispatch(setCartItems(cartResponse.data.cart.items));
-      console.log(cartResponse.data);
-      console.log(response.data);
+      console.log(cartResponse.data.cart);
       console.log("Login Successful");
       navigate("/");
     } catch (error) {

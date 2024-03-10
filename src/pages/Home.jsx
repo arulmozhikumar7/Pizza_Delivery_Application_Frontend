@@ -1,7 +1,9 @@
 import React from "react";
 import PizzaList from "../components/PizzaCard";
-import Cart from "../components/Cart";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
+
 // Wherever you want to reset local storage
 //import { resetLocalStorage } from "../storage/localStorage";
 
@@ -16,7 +18,7 @@ const Home = () => {
   console.log("Token:", token);
   return (
     <>
-      {isAuthenticated && <Cart />}
+      <ToastContainer />
       <PizzaList />
     </>
   );

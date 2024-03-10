@@ -2,6 +2,9 @@ import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeItemFromCart,
@@ -9,11 +12,12 @@ import {
   decreaseItemQuantity,
 } from "../store/slices/cartSlice";
 export default function Cart() {
-  const totalPrice = useSelector((state) => state.cart.totalPrice);
   const [open, setOpen] = useState(true);
   const [cartItems, setCartItems] = useState([]);
+  const [total, setTotal] = useState(0);
   const userId = useSelector((state) => state.user.userId);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchCart = async () => {
       try {
@@ -28,6 +32,19 @@ export default function Cart() {
     };
     fetchCart();
   }, []);
+  const getTotalPrice = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/cart/total/${userId}`
+      );
+      setTotal(response.data.totalAmount);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getTotalPrice();
+  }, [cartItems]);
   const handleRemoveFromCart = (pizzaId) => {
     try {
       const response = axios.delete(
@@ -36,7 +53,8 @@ export default function Cart() {
 
       setCartItems(cartItems.filter((item) => item.pizza._id !== pizzaId));
       dispatch(removeItemFromCart(pizzaId));
-
+      toast.success("Item removed from cart");
+      getTotalPrice();
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -55,6 +73,7 @@ export default function Cart() {
             : item
         )
       );
+      getTotalPrice();
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -78,6 +97,7 @@ export default function Cart() {
             : item
         )
       );
+      getTotalPrice();
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -215,18 +235,19 @@ export default function Cart() {
                     <div className="px-4 py-6 border-t border-gray-200 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Total</p>
-                        <p>₹ {totalPrice}</p>
+                        <p>₹ {total}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <Link
+                          to="/checkout"
+                          onClick={() => setOpen(false)}
                           className="flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700"
                         >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                       <div className="flex justify-center mt-6 text-sm text-center text-gray-500">
                         <p>

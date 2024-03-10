@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addItemToCart } from "../store/slices/cartSlice";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const PizzaCard = ({ pizza }) => {
+  console.log(pizza);
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId); // Assuming user ID is stored in the Redux store
-
+  console;
   const handleAddToCart = async () => {
     try {
       console.log(pizza._id);
@@ -16,7 +18,10 @@ const PizzaCard = ({ pizza }) => {
         pizzaId: pizza._id,
         quantity: 1,
       });
-      dispatch(addItemToCart(pizza)); // Dispatch addItemToCart action with pizza data
+      console.log(pizza);
+      dispatch(addItemToCart(pizza));
+      toast.success("Pizza added to cart!");
+      // Dispatch addItemToCart action with pizza data
       console.log("Pizza added to cart:", response.data);
     } catch (error) {
       console.error("Error adding pizza to cart:", error);

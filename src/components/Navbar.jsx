@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import { resetLocalStorage } from "../storage/localStorage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.user.userId);
@@ -13,7 +14,7 @@ const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.items);
   console.log("Cart Items:", cartItems.length);
 
-  const [openCart, setOpenCart] = useState(true);
+  const [openCart, setOpenCart] = useState(false);
   const handleLogout = async () => {
     try {
       const response = await axios.post(
@@ -35,9 +36,12 @@ const Navbar = () => {
   return (
     <header className="text-gray-600 body-font">
       <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
-        <a className="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">
+        <Link
+          to="/"
+          className="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0"
+        >
           <img src="/pizza.png" className="w-10 h-10 p-2 text-white" />
-        </a>
+        </Link>
         <span className="ml-3 text-xl font-bold">Arul's Pizza Hub</span>
         <nav className="flex flex-wrap items-center justify-center text-base md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400"></nav>
         {isAuthenticated ? (
