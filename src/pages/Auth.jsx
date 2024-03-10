@@ -37,13 +37,13 @@ const Auth = () => {
     try {
       event.preventDefault();
       const response = await axios.post(
-        "http://localhost:3000/api/auth/signin",
+        "https://pizza-delivery-application-backend.onrender.com/api/auth/signin",
         loginformData
       );
       console.log(response.data);
       dispatch(loginSuccess(response.data));
       const cartResponse = await axios.get(
-        `http://localhost:3000/api/cart/${response.data.userId}`
+        `https://pizza-delivery-application-backend.onrender.com/api/cart/${response.data.userId}`
       );
 
       dispatch(setCartItems(cartResponse.data.cart.items));
@@ -59,7 +59,7 @@ const Auth = () => {
     try {
       event.preventDefault();
       const response = await axios.post(
-        "http://localhost:3000/api/auth/signup",
+        "https://pizza-delivery-application-backend.onrender.com/api/auth/signup",
         registerFormData
       );
       alert("Registered Successfully.Check your mail for verification");

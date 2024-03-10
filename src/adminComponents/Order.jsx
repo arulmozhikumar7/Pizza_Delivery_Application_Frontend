@@ -8,7 +8,9 @@ const Order = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/order");
+        const response = await axios.get(
+          "https://pizza-delivery-application-backend.onrender.com/api/order"
+        );
         console.log(response.data);
         setOrders(response.data);
       } catch (error) {
@@ -21,9 +23,12 @@ const Order = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      await axios.put(`http://localhost:3000/api/order/${orderId}`, {
-        status: newStatus,
-      });
+      await axios.put(
+        `https://pizza-delivery-application-backend.onrender.com/api/order/${orderId}`,
+        {
+          status: newStatus,
+        }
+      );
       // After updating the status, fetch the updated orders again
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
@@ -31,7 +36,9 @@ const Order = () => {
         )
       );
 
-      const response = await axios.get(`http://localhost:3000/api/order`);
+      const response = await axios.get(
+        `https://pizza-delivery-application-backend.onrender.com/api/order`
+      );
       setOrders(response.data);
       toast.success("Status updated successfully");
     } catch (error) {

@@ -13,11 +13,14 @@ const PizzaCard = ({ pizza }) => {
     try {
       console.log(pizza._id);
       console.log(userId);
-      const response = await axios.post(`http://localhost:3000/api/cart/add`, {
-        userid: userId,
-        pizzaId: pizza._id,
-        quantity: 1,
-      });
+      const response = await axios.post(
+        `https://pizza-delivery-application-backend.onrender.com/api/cart/add`,
+        {
+          userid: userId,
+          pizzaId: pizza._id,
+          quantity: 1,
+        }
+      );
       console.log(pizza);
       dispatch(addItemToCart(pizza));
       toast.success("Pizza added to cart!");
@@ -85,7 +88,7 @@ const PizzaList = () => {
     const getPizzas = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/pizza/getpizzas"
+          "https://pizza-delivery-application-backend.onrender.com/api/pizza/getpizzas"
         );
         setPizzas(response.data);
         console.log("Pizzas fetched successfully");

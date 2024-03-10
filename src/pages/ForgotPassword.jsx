@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/forgotpassword",
+        "https://pizza-delivery-application-backend.onrender.com/api/auth/forgotpassword",
         {
           email: email,
         }

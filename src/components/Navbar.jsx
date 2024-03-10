@@ -18,7 +18,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/logout",
+        "https://pizza-delivery-application-backend.onrender.com/api/auth/logout",
         {
           userId: userId,
         }

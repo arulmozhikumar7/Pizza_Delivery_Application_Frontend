@@ -22,7 +22,7 @@ export default function Cart() {
     const fetchCart = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/cart/${userId}`
+          `https://pizza-delivery-application-backend.onrender.com/api/cart/${userId}`
         );
         setCartItems(response.data.cart.items);
         console.log(response.data.cart.items);
@@ -35,7 +35,7 @@ export default function Cart() {
   const getTotalPrice = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/cart/total/${userId}`
+        `https://pizza-delivery-application-backend.onrender.com/api/cart/total/${userId}`
       );
       setTotal(response.data.totalAmount);
     } catch (error) {
@@ -48,7 +48,7 @@ export default function Cart() {
   const handleRemoveFromCart = (pizzaId) => {
     try {
       const response = axios.delete(
-        `http://localhost:3000/api/cart/remove/${pizzaId}/${userId}`
+        `https://pizza-delivery-application-backend.onrender.com/api/cart/remove/${pizzaId}/${userId}`
       );
 
       setCartItems(cartItems.filter((item) => item.pizza._id !== pizzaId));
@@ -63,7 +63,7 @@ export default function Cart() {
   const handleIncreaseQuantity = (productId) => {
     try {
       const response = axios.put(
-        `http://localhost:3000/api/cart/increase/${productId}/${userId}`
+        `https://pizza-delivery-application-backend.onrender.com/api/cart/increase/${productId}/${userId}`
       );
       dispatch(increaseItemQuantity(productId, 1));
       setCartItems((prevItems) =>
@@ -86,7 +86,7 @@ export default function Cart() {
   const handleDecreaseQuantity = (productId) => {
     try {
       const response = axios.put(
-        `http://localhost:3000/api/cart/reduce/${productId}/${userId}`
+        `https://pizza-delivery-application-backend.onrender.com/api/cart/reduce/${productId}/${userId}`
       );
 
       dispatch(decreaseItemQuantity(productId, 1));

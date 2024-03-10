@@ -21,7 +21,7 @@ const Pizza = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/pizza/getpizzas"
+          "https://pizza-delivery-application-backend.onrender.com/api/pizza/getpizzas"
         );
         console.log(response.data);
         setPizzas(response.data);
@@ -51,12 +51,12 @@ const Pizza = () => {
         image: editedImage,
       };
       await axios.put(
-        `http://localhost:3000/api/pizza/editpizza/${editingPizza._id}`,
+        `https://pizza-delivery-application-backend.onrender.com/api/pizza/editpizza/${editingPizza._id}`,
         updatedPizza
       );
       // Refresh the pizza list after updating
       const response = await axios.get(
-        "http://localhost:3000/api/pizza/getpizzas"
+        "https://pizza-delivery-application-backend.onrender.com/api/pizza/getpizzas"
       );
       setPizzas(response.data);
       // Reset editing state
@@ -69,7 +69,7 @@ const Pizza = () => {
   const handleAddPizza = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/pizza/addpizza",
+        "https://pizza-delivery-application-backend.onrender.com/api/pizza/addpizza",
         newPizzaData
       );
       console.log(response.data);
@@ -83,7 +83,7 @@ const Pizza = () => {
 
       // Refresh the pizza list
       const pizzas = await axios.get(
-        "http://localhost:3000/api/pizza/getpizzas"
+        "https://pizza-delivery-application-backend.onrender.com/api/pizza/getpizzas"
       );
       setPizzas(pizzas.data);
       toast.success("Pizza added successfully!");

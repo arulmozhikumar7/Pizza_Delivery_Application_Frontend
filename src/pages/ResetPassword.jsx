@@ -27,7 +27,7 @@ const ResetPassword = () => {
 
       // Send a request to the backend to reset the password
       const response = await axios.post(
-        "http://localhost:3000/api/auth/reset-password",
+        "https://pizza-delivery-application-backend.onrender.com/api/auth/reset-password",
         {
           token,
           newPassword,

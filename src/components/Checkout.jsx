@@ -29,7 +29,7 @@ const Checkout = () => {
     const fetchCart = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/cart/${userId}`
+          `https://pizza-delivery-application-backend.onrender.com/api/cart/${userId}`
         );
         setCartItems(response.data.cart.items);
       } catch (error) {
@@ -44,7 +44,7 @@ const Checkout = () => {
     const fetchTotalAmount = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/cart/total/${userId}`
+          `https://pizza-delivery-application-backend.onrender.com/api/cart/total/${userId}`
         );
         setTotal(response.data.totalAmount);
       } catch (error) {
@@ -58,7 +58,7 @@ const Checkout = () => {
   const confirmPayment = async (payment_id) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/payment/verify",
+        "https://pizza-delivery-application-backend.onrender.com/api/payment/verify",
         {
           payment_id: payment_id,
           userId: userId,
@@ -92,9 +92,12 @@ const Checkout = () => {
 
   const createRazorpayOrder = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/api/payment/", {
-        userId: userId,
-      });
+      const response = await axios.post(
+        "https://pizza-delivery-application-backend.onrender.com/api/payment/",
+        {
+          userId: userId,
+        }
+      );
       console.log(response.data);
       // Initialize Razorpay with options
       const options = {

@@ -5,7 +5,9 @@ const User = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/auth");
+        const response = await axios.get(
+          "https://pizza-delivery-application-backend.onrender.com/api/auth"
+        );
         setUsers(response.data);
         console.log(response.data);
       } catch (error) {
