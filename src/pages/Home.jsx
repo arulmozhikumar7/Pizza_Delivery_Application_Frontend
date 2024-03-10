@@ -12,6 +12,8 @@ const Home = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const token = useSelector((state) => state.user.token);
   const userId = useSelector((state) => state.user.userId);
+  const admin = useSelector((state) => state.user.isAdmin);
+  console.log("Admin:", admin);
   console.log("User ID:", userId);
 
   console.log("Is Authenticated:", isAuthenticated);

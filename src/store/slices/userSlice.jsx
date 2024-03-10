@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isAuthenticated: false,
+  isAdmin: false,
   token: null,
   userId: null, // Add userId field to the initial state
 };
@@ -13,7 +14,9 @@ const userSlice = createSlice({
     loginSuccess: (state, action) => {
       state.isAuthenticated = true;
       state.token = action.payload.token;
-      state.userId = action.payload.userId; // Store user ID upon successful login
+      state.userId = action.payload.userId;
+      state.isAdmin = action.payload.isAdmin;
+      // Store user ID upon successful login
     },
     logoutSuccess: (state) => {
       state.isAuthenticated = false;

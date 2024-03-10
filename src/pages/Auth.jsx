@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { setCartItems } from "../store/slices/cartSlice";
+import { Link } from "react-router-dom";
 import axios from "axios";
 const Auth = () => {
   const [activeTab, setActiveTab] = useState("login");
@@ -39,7 +40,7 @@ const Auth = () => {
         "http://localhost:3000/api/auth/signin",
         loginformData
       );
-
+      console.log(response.data);
       dispatch(loginSuccess(response.data));
       const cartResponse = await axios.get(
         `http://localhost:3000/api/cart/${response.data.userId}`
@@ -148,12 +149,12 @@ const Auth = () => {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <a
-                    href="#"
+                  <Link
+                    to="/forgot-password"
                     className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <button
                   type="submit"
